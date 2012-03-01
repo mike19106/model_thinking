@@ -1,0 +1,237 @@
+Model Thinking
+==============
+
+https://www.coursera.org/modelthinking/class/
+
+
+Section 4 - Intro to Decision Making
+====================================
+
+how people make decisions
+how people should make decisions
+
+multi-criterion models
+spatial models
+decision making under uncertainty
+
+these models have two uses
+	normative - make us better at deciding
+	positive - predict the behavior of others
+
+two broad classes of models
+	multi-criterion
+		lots of dimensions
+		choose one alternative vs another
+		e.g. feature comparisons
+
+	probabilistic
+		uncertainty of outcomes
+		how to balance risk vs reward
+		e.g. graph feature X vs feature Y
+			how far is each choice from the ideal point?
+
+making decisions under uncertainty
+	don't know how the features will unfold
+	decision trees
+
+	decision trees can also tell us the value of information
+
+
+Multi-criterion Decision Making
+-------------------------------
+
+feature comparison chart - criteria vs options
+	list allof your criteria
+	which alternative wins for each criteria?
+
+	criteria	O1	O2
+	---------------------------
+	C1		X
+	C2			X
+	C3			X
+
+two approaches
+	qualitative - simple criterion count
+		for each criterion, best option gets a point
+		rank based on # of points
+	quantitative - weighted criterion count - some criteria mean more than others
+		add a multiplier (M) to each criterion
+		for each criterion, best option gets M points
+		rank based on # of points
+
+Popup quiz
+
+Q - Joanne considered two cameras. Here are their relevant specifications. Camera A: Weight 8 ounces, Memory 12 MB, 5X Zoom, 2 inch screen Camera B: Weight 6 ounces, 10 MB memory, 4X Zoom, 1.5 inch screen What can we say about Joanne's decision making approach?
+
+She uses quantitative methods and cares about zoom
+She uses qualitative multi criterion decision making
+She's irrational
+She uses a quantitative approach and cares a lot about having a light camera
+
+Assuming that less weight, more memory, more zoom power, and a bigger screen are better, then Camera B wins on three of the four criteria Therefore, she must use a quantitative model and care a lot about weight.
+
+[This is either 
+	wrong - since no weights are given, it is qualitative
+	missing info - the weights were not included]
+
+
+Spatial Choice Models
+---------------------
+
+measuring distance from an ideal point
+	on a single dimensional scale, or
+	a multi-dimensional space
+
+single dimension
+	make a scale mapping range of values for the criterion
+	place each alternative on the scale based on its score/value for the criterion
+		hot/cold, left/right, etc
+	there is an ideal point on the scale
+	best choice is the alternative closest to the ideal point
+
+	Development/applications of the model
+		Hotelling's location model 
+		Down applied this to how people vote
+			map candidate on a left vs right scale
+			d1 = distance between voter and candidate 1
+			d2 = distance between voter and candidate 2
+
+		Gelman - Supreme Court conservativity
+			not just a simple ranking - adds in data
+				map conservativity score (Y-axis) for each participant (SC Justice)
+				do this for multiple points in time (each SC session) on X-axis
+
+Multi-dimensional mapping
+	burger attributes
+		attribute	ideal	O1	D1	O2	D2
+		----------------------------------------------------
+		cheese		2	2	0	2	0
+		patties		2	2	0	1	1
+		tomatoes	2	0	2	2	0
+		catsup		4	3	1	3	1
+		mayo		4	4	0	4	0
+		pickles		4	6	2	4	0
+
+		these attributes would be modeled as six dimensions
+			a vector of length 6
+
+	list each criterion and its ideal value/score
+	for each alternative	
+		score the alternative at each criterion (O1, O2)
+		calculate the difference (absolute value) from ideal for each criterion (D1, D2)
+		sum the differences as the distance from the ideal
+	best choice (closest to ideal) is lowest sum	
+
+	use this normatively e.g. to determine who to vote for
+		positions on issues
+	use this positively to infer some person's ideal point e.g. burgers example
+		if someone chose O1, then we can infer that
+			they prefer two patties, or
+			they don't like tomatoes, or
+			they really like pickles, or
+			some combination of these
+			(ignore criteria where there is no difference among alternatives)
+
+	Development/applications of the model
+		dw-nominate mapping members of Congress on 2D L/R plane
+
+	(Additional thoughts)
+		you can also weight each ideal
+
+		this is a one-dimensional representation on n-dimensional space
+			each criterion is added as another dimension
+				e.g. cars - speed vs comfort
+			there is an ideal point in this multi-dimensional space
+
+use this model to decide what to buy, who to vote for...
+	how close are the alternatives to the ideal point?
+	normative
+apply the models to data
+	where are SC Justices or Members of Congress ideologically? (across one or more dimensions)
+	determine people's product preferences based on purchasing decisions
+	positive
+
+popup quiz
+
+Q - Jim has spatial preferences over ice cream cones. He cares about the height of the cone in inches and the number of scoops. He chooses a three scoops on a four inch cone over either a double scoop on a seven inch cone or four scoops on a two inch cone, Which of the following could be his ideal point? (assume that he computes the distance from each option to his ideal point).
+
+3 scoops, 5 inch cone
+1 scoop, 8 inch cone
+2 scoops, 4 inch cone
+11 scoops, 3 inch cone
+
+crit	ideal	O1	O2	O3
+scoops		3	2	4
+cone		4	7	2
+
+A - He prefers (3,4) to (2,7) and (4,2). If his ideal point were (3,5), his distance to (3,4) would be 2 [this is wrong, the distance from (3,4) to (3,5) is 1]. His distance to (2,7) and (4,2) would be much larger. So (3,5) is possible. (1,8) is not possible as it's closer to (2,7). He would have chosen the two scoops on the seven inch cone. By similar logic (2,4) is possible, but (11,3) is not. If his ideal point was (11,3), he'd have chosen (4,2)
+
+
+Probability: The Basics
+-----------------------
+
+Decision making under uncertainty
+	need to consider probabilities of criteria, outcomes
+
+probability -the odds of something happening
+
+3 axioms of probability
+	1) 0 ≤ P ≤ 1
+		Probability of an outcome is in the range [0,1]
+		if something can't happen, P = 0
+		if something is certain to happen, P = 1
+	2) Σ P = 1
+		Sum of all possible outcomes equals one
+		have to make a distinction between outcomes and events
+			an outcome is an individual thing that can happen
+			an event is a subset of outcomes
+	3) A ⊆ B ⇒ P(B) ≥ P(A)
+		If event A is a subset of event B, the probability of B is greater than the probability of A
+		e.g. flippng a coin
+			A = {H}, B = {H,T}
+			P(A) = 0.5, P(B) = 1
+
+3 types of probability
+	1) classical probability - all possible outcomes are known, and equally likely
+		we know why a probability is what it is
+		dice, coins, cards, lotteries
+		P(a) = F/N
+		e.g. roll a die
+			P(4) = 1/6, P(even) = 3/6, P(odd) = 3/6
+	2) Relative Frequency - # possible outcomes (n) is so large that we cannot know all of them
+		we count occurrences of an event within a sample 
+		P(a) = observed f / observed n
+		e.g. are there more words that begin with r, or that have ras the 3rd letter?
+		e.g. will it rain on June 7th?
+			look up weather for last 100 years
+				P(rain) = F/100 - (F = # times it rained on June 7th)
+			requries an assumption that nothing has changed over that period of time
+	3) Subjective probability
+		a) estimates based on guessing
+			!!! observe the three axioms when guessing !!!
+				(Axiom 2 might not have applied in the student example, 
+				unless we were told that one of the choices was the correct answer)
+		b) estimates determined via models
+
+		e.g. will housing prices go up this year?
+			guess - 30%
+		
+
+popup quiz
+
+Q - If you flip a fair coin and roll a six sided die, what's the probability of getting neither a HEAD or a 3?
+
+5 out of 12
+1 out of 6
+4 out of 12
+1 out of three
+
+A - This means that you have to get a tail (probability 0.5) and get something other than a three (probability 5/6). Therefore we have to multiply those two events and we get 5/12. You can also get this answer by enumerating all possibilities and counting up al the cases where you have a tail and no three. These are T1,T2, T4, T5, and T6.
+
+
+Decision Trees
+--------------
+
+
+
+

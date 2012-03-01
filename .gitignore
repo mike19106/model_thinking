@@ -1,0 +1,9 @@
+# ignore readings
+R*
+
+# ignore transcripts
+sub*
+
+# ignore others
+*~
+

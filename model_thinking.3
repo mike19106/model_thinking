@@ -1,0 +1,359 @@
+Model Thinking
+==============
+
+https://www.coursera.org/modelthinking/class/
+
+
+Section 3 - Aggregation
+=======================
+
+Aggregation can produce unexpected results
+	saw this in Schelling, where macro behavior was very different from micro motives
+	"More is different"
+	Emergent properties (macro phenomena)
+		wetness, from individual water molecules
+		consciousness, from neurons, axons and dendrites
+
+complexity of adding things up
+
+We will analyze aggregation of 
+	Actions - central limit theorem
+		allows us to predict points, and understand data
+	Single Rule - game of life
+		allows us to understand patterns
+	Family of Rules - cellular automata
+		allows us to understand class of outcome
+			equilibria, patterns, complexity, complete randomness/chaos
+	Preferences - making collective choices
+		work through logic
+
+
+Central Limit Theorem
+---------------------
+
+independent actions of individual actors
+
+probability distribution
+	list of 
+		all of the possible outcomes
+		the probabilities of each of those outcomes
+
+	e.g. # of people in a family that go to the beach
+
+	#  P
+	---------
+	0  .10
+	1  .15
+	2  .40
+	3  .15
+	4  .20
+
+	sum(P) always equals 1.0
+
+CLT tells us that
+	a whole bunch of individual, independent events will aggregate to a normal distribution (bell curve)
+	the most likely outcome is the one in the middle 
+
+	CLT allows us to predict a lot of things
+
+binomial distribution
+	a discrete probability distribution with just two possible outcomes
+		pass/fail, heads/tails, live/die
+	P - probability of outcome (heads, pass,live)
+	N - number of trials
+
+mean of a curve
+	tells us the most likely outcome
+
+	mean = pN
+		15% probability of going to beach on a given day
+		(0.15) * 1000
+
+		if P = 0.5 - (outcomes are equally likely e.g. flipping a coin)
+			mean reduces to N/2
+				1000/2
+
+Standard deviation of a curve
+	σ (sigma) - tells us how wide/spread out the curve is
+
+	it will always be the case that (just for a normal dist?)
+		68% of the population will be within 1 σ
+		95% of the population will be within 2 σ
+		99% of the population will be within 3 σ
+
+	σ  +/-%
+	-------
+	1  34.1
+	2  13.6
+	3   2.1
+	4   0.1
+
+	if you know the mean and the standard deviation, you can determine the range of probable outcomes
+		e.g. mean = 100 persons show up at a meeting
+		σ = 2
+			68% probability between 98-102
+			95% probability between 96-104
+		σ = 15
+			68% probability between 85-115
+			95% probability between 70-130
+
+	σ = √P(1-P)N
+		if P = 0.5 - (outcomes are equally likely e.g. flipping a coin)
+			σ reduces to √N/2
+
+Example Boeing 747
+	380 seats
+	400 tickets sold
+	90% ticketholders show up
+
+	mean = (0.9)400 = 360
+	σ = √(0.9)(0.1)400 = √36 = 6
+
+	68% probability between 354-366
+	95% probability between 348-372
+	99% probability between 342-378
+
+CLT says that
+	when you add random variables
+		that are independent
+		with finite (bounded) variance
+	they sum to normal distribution
+
+Bimodal distribution
+
+Not all things follow a normal distribution
+	stock prices
+		not independent - people buy/sell when others buy/sell
+
+
+Six Sigma
+---------
+
+3.4/1,000,000
+
+Example - Banana sales
+	mean 500 lb/day
+	σ 10 lb/day
+
+	how many lbs needed to handle a 6σ surge?
+		500 + 6(10) = 560
+
+Example - sheet metal
+	500-560mm required thickness
+	530mm avg
+
+	what must σ be to ensure that 6σ operation lies within the required thickness?
+		560-530 = 30
+		30/6 = 5
+
+
+Game of Life
+------------
+
+one of a class of model called cellular automata
+
+shows how things aggregate
+	practice our thinking
+	learn subtleties of aggregation
+leads to some surprising conclusions
+
+shows how hard it is to infer at the macro level from what's going on at the micro level
+
+John Conway - Cambridge mathematician
+
+center of tic-tac-toe grid 
+	eight neighbors
+	iterations based on neighbors
+		if the cell is off
+			turn on if exactly three neighbors are on
+		if the cell is on
+			if <2 or >3 neighbors on, turn off
+			otherwise, stay on
+
+patterns
+	beacon - two 2x2 squares connected at LR/TL corners
+	figure 8 - two 3x3 squares connected at LR/TL corners
+	f-pimento - XX
+                   XX
+                    X
+		produces gliders
+		almost seems like it's alive
+		compare to human brain 
+			has neurons that follow very simple rules
+			that are connected in such a way 
+			that they produce really novel patterns
+				memory, thought, cognition, personality, 
+
+simple things, following simple rules, can create incredibly elaborate patterns
+
+emergent patterns
+
+Understand class of outcome
+	1) fixed points (steady state)
+	2) alternation (blinking)
+	3) randomness
+	4) complexity (repeating patterns)
+
+What GoL teaches us
+	self-organized patterns appear without a designer
+		gliders, blinkers, glider guns...
+	emergence - functionalities appear
+		patterns that have, or seem to have functions
+		gliders, glider guns, counters, computers
+		consciousness and cognition are emergent phenomena in the brain
+	help us get the logic right
+		simple rules produce incredible phenomena
+
+
+
+Cellular Automata
+-----------------
+
+one dimensional array along the X axis
+	each cell only has two neighbors - left, right
+	allows the Y axis to represent time
+		following a cell downward let's you see its state at each iteration
+
+8 possible states
+	000
+	001
+	010
+	011
+	100
+	101
+	110
+	111
+
+	each of these states can result in one of two outcomes - on or off
+	thus, there are 2**8 (256) possible rule sets, or universes
+		exhaustively studied by Wolfram in ANKoS
+	rule sets numbered 0-255 
+
+4 classes of behavior
+	1) fixed points (steady state)
+	2) alternation (blinking)
+	3) randomness
+	4) complexity (repeating patterns)
+
+Rule 30 produces perfect randomness
+rule 110 produces complex patterns
+
+"It from bit"
+	anything and everything in be universe can be generated by a series of yes/no questions
+		thus represented by a string of binary digits
+
+Langton's λ
+	tells us what these outcomes look like
+	simpler approach than Wolfram
+	number or percentage of things that are on (e.g. 3 or 3/8)
+	0/8 - everything dies
+	1/8 - alternation, blinking
+	4/8 - (rule 30) chaotic, random
+	5/8 - (rule 110) complex
+
+	λ	sets	CIII	CIV
+	0	1	0	0
+	1	8	0	0
+	2	28	2	0
+	3	56	4	1
+	4	70	20	4
+	5	56	4	1
+	6	28	2	0
+	7	8	0	0
+	8	1	0	0
+
+	chaos (class 3) can only occur when λ is 2-6
+	complexity (class 4) can only occur when λ is 3-5
+	thus chaos and complexity may arise when there are intermediate levels of interdependence
+
+	complexity in stock markets, due to interdependence of individual actors
+
+Summary
+	simple rules can combine to form anything
+	"it from bit"
+	complexity and randomness require interdependency
+
+
+Preference Aggregation
+----------------------
+
+need a different mathematical structure than that used for aggregating actions/numbers
+
+preferences
+	revealed actions - give people a choice and askwhat they prefer
+	preference ordering
+		complete, ranked listing of someone's preferences within a category/class
+	transitive, rational - cannot be a conflict/inconsistency in the ordering
+
+preference aggregation methods
+	tally method - tally votes at each position (1st, 2nd...)
+	pairwise method - for each unique pair, tally preferences
+
+Condorcet's paradox
+	individual preferences are consistent, but aggregate preferences may not be
+	severe implications
+		when we think about voting, we could get a random outcome
+		people might want to vote strategically
+		creates incentives, opportunities, conditions to manipulate the system
+
+
+========================================
+
+Statistics
+----------
+
+population - The total set of observations that can be made
+sample     - a set of observations drawn from a population
+parameter  - a measurable characteristic of a population, such as a mean or standard deviation.
+statistic  - a measurable characteristic of a sample, such as a mean or standard deviation.
+sampling method - a procedure for selecting sample elements from a population.
+random number - a number determined totally by chance, with no predictable relationship to any other number.
+random number table - a list of numbers
+
+
+Measures of Central Tendency - mean, median, mode
+Proportions and Percentages - degree to which a population possesses a particular attribute
+
+N - a population
+n - a sample
+_
+X - the population mean
+μ - the population mean
+_
+x - the sample mean
+P - The proportion of elements in the population that has a particular attribute.
+p - The proportion of elements in the sample that has a particular attribute.
+Q - The proportion of elements in the population that does not have a specified attribute. Note that Q = 1 - P.
+q - The proportion of elements in the sample that does not have a specified attribute. Note that q = 1 - p.
+
+
+Measures of Variability - range, variance, standard deviation
+
+σ² - The variance of the population.
+σ  - The standard deviation of the population.
+s² - The variance of the sample.
+s  - The standard deviation of the sample.
+
+Range = Maximum value - Minimum value
+
+Variance of a random variable
+	σ² = Σ ( Xi - μ )² / N
+	              _
+	s² = Σ ( xi - x )² / ( n - 1 )
+
+Variance of proportions
+	σ² = PQ / n
+	s² = pq / ( n - 1 )
+
+Standard deviation
+	σ = √σ²
+	s = √s²
+
+Sampling Distribution of the Mean
+	 _
+	μx = μ
+	 _
+	σx = σ * sqrt( 1/n - 1/N )
+	   = σ / sqrt(n) for large N
+
+

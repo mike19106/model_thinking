@@ -1,0 +1,270 @@
+Model Thinking
+==============
+
+https://www.coursera.org/modelthinking/class/
+
+
+Section 2 - Segregation and Peer Effects
+========================================
+
+
+Sorting and Peer Effects Introduction
+-------------------------------------
+
+People that live in the same area tend to look, act, think alike 
+	sorting - homophily - we choose to hang out with people who are like us
+	peer effects - we start to act like the people we hang out with
+
+	both of these create groups that look alike
+
+	study and understand these effects using multiple models - unexpected results
+		schelling's tipping model
+		granovetter
+		standing ovation
+
+		identification problem - sorting or peer effects
+
+we will use agent-based models in this section
+	we study agents (individuals), 
+	who follow rules (have behaviors), 
+	which result in outcomes
+
+	contrast with equation-based models
+
+	game theory studies individuals behaving optimally
+	we will study agents behaving normally
+
+
+Schelling's Segregation Model
+-----------------------------
+
+(spatial segregation model)
+
+studied racial and income segregation in NYC
+
+choosing where to live - should i stay or should i go?
+	actor - person living in a neighborhood (the middle of a tic-tac-toe grid)
+	behavior - (threshold based rule) 
+		move if < 33% of neighbors are like me
+	outcome - ended up with significantly higher segregation than expected
+
+	key insight - micromotives !== macrobehavior
+		what you see at macro level may not represent what's going on at micro level 
+
+		33% threshhold yields 72% segregation
+		52%        -->        94%
+		80%        -->        no equilibrium, continuous churn
+
+	tipping phenomenon - 
+		exodus tip - one person moving out causes another person to move out
+		genesis tip - one person coming in causes another person to move out
+
+
+Measuring Segregation
+---------------------
+
+TID - total index of dissimilarity
+	how segregated is a city - rich people (blue) vs poor people (yellow)
+
+	| b/B - y/Y |
+		determines how distorted the distribution is on a given block
+		b = # blue on block, B = blue total
+		y = # yellow on block, Y = yellow total
+
+		measure each block individually
+		sum the block measurements 
+
+		rationalize to number between 0-1 
+			divide by number of populations in test - in this case 2 (blue, yellow)
+
+	test cases for model
+		case where all blocks are 50/50 - TID = 0
+		case where half of blocks are all blue, other half all yellow - TID = 2/2 = 1
+
+
+Consider a city consisting of four city blocks of equal population. One block consists of all rich people. One block consists of all poor people, and two blocks consist of half rich and half poor people. What is the index of dissimilarity?
+
+B = 20                - total population of rich people
+Y = 20                - total population of poor people
+
+10/20 - 0/20  = 10/20 - all rich people
+0/20  - 10/20 = 10/20 - all poor people
+5/20  - 5/20  = 0     - 50/50 mix
+5/20  - 5/20  = 0     - 50/50 mix
+
+20/20 = 1             - sum of all blocks
+1/2 = 0.5             - divide by # of populations in test
+
+There are equal numbers of rich and poor people. For the block of all rich people, the contribution to the index of dissimilarity equals |1-0.5| = 0.5. For the block of all poor people, the contribution to the index equals |0-0.5| = 0.5. For the other two blocks the contribution equals |0.5-0.5| = 0. Therefore, the index of dissimilarity equals (0.5+0.5)/2 = 0.5. Don't forget to divide by two.
+
+
+Peer Effects
+------------
+
+Contagion effect/phenomenon
+	sometimes the tail wags the dog
+		the people at the ends of the distribution (extremists) really drive what happens
+		makes these things incredibly difficult to predict
+
+Granovettor's model
+	N individuals
+	each has a threshold (e.g. for joining in on a collective activity)
+		Tj for person J
+		Join if Tj others join
+
+	growth determined by successive threshold triggering
+
+	collective action more likely if
+		lower thresholds
+		more variation in thresholds
+
+		need to know 
+			avg level of discontent
+				sum(T0..Tj)/N
+					determine individual thresholds
+					sum the thresholds
+					divide by N
+			distribution of discontent scores
+
+		are there a quantity of people willing to act, and are they connected?
+
+	collective action will not happen if nobody has a threshold of zero
+
+use to model virality, growth, adoption...
+
+Suppose that there are ten people who have the following thresholds for joining a volunteer project: Two will volunteer even if no one else does. Six require five others. And two will volunteer so long as anyone else does. How many people will volunteer total?
+
+0, 0, 1, 1 will act
+5, 5, 5, 5, 5, 5 will not act
+
+Correct answer is 4. The two who will volunteer regardless of others, volunteer Since these two volunteer, the two that will volunteer as long as at least one other person has volunteered will also volunteer. However, the other 6 will not volunteer because they will only volunteer if 5 others have volunteered and only 4 have. So 4 of the 10 will volunteer
+
+
+Standing Ovation Model
+----------------------
+
+builds on granovettor
+allows us to look at threshold models and peer effects in more subtle ways
+
+two decision points (whether or not you're going to stand up)
+	initially, at end of performance (quick judgement)
+	after seeing larger audiences decision
+
+	thus, this has 
+		peer effects
+		information effects
+			ovation gives you info about the quality of the show
+
+threshold based on quality (granovettor threshold was based on quantity)
+
+rules
+	initial rule
+		stand if S > T
+
+		T - threshold to stand
+		S = Q + E - signal (quality plus error/diverity)
+			Q - quality of performance 
+				Q = T means that 50% of the people will stand
+			E - either error OR diversity
+				error - variation in what we perceive, noise
+				diversity - everybody brings different background/experiences
+
+	subsequent rule
+		stand if > X% stand (peer effect)
+
+claims
+	1 - the higher the Q, the more people stand
+	2 - the lower the T, the more people stand
+	3 - the lower the X, the more people stand
+	4 - if Q < T, then the more variation in E, the more people stand
+
+example
+	N = 1000
+	T = 60
+	Q = 50
+
+	E = 0 --> S = 50
+		nobody stands
+	E = [-15, 15] --> S = 35-65
+		only those whose E > 10 will stand
+	E = [-50, 50]
+		those whose E > 10 will stand
+		those whose X <  will stand
+
+what causes a big E - 
+	audience - diverse, or unsophisticated
+	performance - multidimensional, or complexh
+
+variance in X
+	big X - people really secure in who they are
+	small X - people ready to jump on any bandwagon
+
+
+If X%, the percentage of others you need to stand, is less than 50%, does increasing the noise increase the chance of a standing ovation if Q is bigger than the threshold? (Hint: Draw the picture)
+
+X < 50 
+Q > T
+E
+
+No. Q>t means that more than half of the audience perceive the quality of the show to be above their threshold (more than 50% will stand up). if X% is less than 50%, there will always be a standing ovation if Q>t regardless of the variance.
+
+
+advanced ovations
+
+	factors not modeled in the first example
+		theatre
+			who you can see/who can see you
+				those in the front ("celebrities") can't see many other people
+					they influence many others, but are not influenced by others
+				those in the back ("acdemics") can see almost everybody else
+					they don't influence others, but are influenced by others
+		grouping
+			people in groups more liekly to stand if one member stands
+				groups or pairs will exhibit localized peer effects
+				leading to larger and more probable ovations
+
+how do we increase probability of ovation?
+	higher quality (claim 1 - bigger Q)
+	lower threshold (claim 2 - lower T)
+	larger peer effects (claim 3 - lower X)
+	more diverse (claim 4 - bigger E)
+	use celebrities
+	big groups
+
+fertility
+	collective action/participation problems
+		who are celebrities in that context?
+		what groups would have an impact?
+	academic performance
+	urban renewal
+	fitness/health
+
+
+The Identification Problem
+--------------------------
+
+how do you tell whether something happened because of Schelling or standing ovation?
+	sorting (homophily) or peer effect?
+
+	some things are clearly sorting
+		neighborhood segregation
+		middle school kids - four groups white/black boys/girls
+
+	some things are clearly peer effect
+		soda/pop/coke
+
+	why we can't tell from looking at the picture
+		two types of people - A's and B's
+		two example poulations - AABBAA, BBABBA
+			sorting - minorities would migrate
+			peer effect - minorities would assimilate 
+
+			both effects yield AAAAAA and BBBBBB
+
+	in sorting, we can actually see (find evidence) people move
+
+	have to have dynamic, micro level data
+		you can't tell if you just have the snapshot
+
+
+
